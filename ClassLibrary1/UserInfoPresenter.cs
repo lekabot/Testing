@@ -14,44 +14,31 @@ public class UserInfoPresenter
     {
         _form.ShowFormErrors = false;
         _form.ErrorMessage = null;
+
         if (string.IsNullOrEmpty(_form.FirstName))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nFirst Name cannot be empty";
-        }
-
-        if (string.IsNullOrEmpty(_form.Email))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nEmail cannot be empty";
-        }
-
-        if (!string.IsNullOrEmpty(_form.Email) && !_form.Email.Contains("@"))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nEmail must contain @ symbol";
-        }
+            AppendErrorMessage("First Name cannot be empty");
 
         if (string.IsNullOrEmpty(_form.LastName))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nLast Name cannot be empty";
-        }
+            AppendErrorMessage("Last Name cannot be empty");
+
+        if (string.IsNullOrEmpty(_form.Email))
+            AppendErrorMessage("Email cannot be empty");
+        else if (!_form.Email.Contains("@"))
+            AppendErrorMessage("Email must contain @ symbol");
+
+        if (string.IsNullOrEmpty(_form.PlaceOfResidence))
+            AppendErrorMessage("Place of residence cannot be empty");
+
+        if (string.IsNullOrEmpty(_form.Gender))
+            AppendErrorMessage("Gender cannot be empty");
 
         if (string.IsNullOrEmpty(_form.Phone))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nPhone cannot be empty";
-        }
-        if (string.IsNullOrEmpty(_form.Gender))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nGender cannot be empty";
-        }
-        if (string.IsNullOrEmpty(_form.PlaceOfResidence))
-        {
-            _form.ShowFormErrors = true;
-            _form.ErrorMessage += "\nPlace of residence cannot be empty";
-        }
+            AppendErrorMessage("Phone cannot be empty");
+    }
+
+    private void AppendErrorMessage(string message)
+    {
+        _form.ShowFormErrors = true;
+        _form.ErrorMessage += $"\n{message}";
     }
 }
